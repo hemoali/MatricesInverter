@@ -1,0 +1,18 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/ibrahimradwan/Desktop/XtensorProject/main.cpp
+iostream
+-
+xtensor/xarray.hpp
+/Users/ibrahimradwan/Desktop/XtensorProject/xtensor/xarray.hpp
+xtensor/xio.hpp
+/Users/ibrahimradwan/Desktop/XtensorProject/xtensor/xio.hpp
+xtensor/xeval.hpp
+/Users/ibrahimradwan/Desktop/XtensorProject/xtensor/xeval.hpp
+
