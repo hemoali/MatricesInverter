@@ -44,7 +44,7 @@ private:
      * @return pair of 2 arrays {@first contains all matrices L triangles}, {@second contains all matrices U triangles}
      */
     pair<xarray<double>, xarray<double>>
-    matricesLUDecomposition(const xarray<double> &matrices, size_t depth, size_t dim);
+    matricesLUDecomposition(const xarray<double> &matrices, const size_t depth, const size_t dim);
 
     /**
      * Calculate the value to be subtracted from the current L-Col
@@ -83,7 +83,8 @@ private:
      * @return xarray The intermediate solutions array
      */
     xarray<double>
-    calculateIntermediateSolution(const xarray<double> &L, const xarray<double> &U, size_t depth, size_t dim);
+    calculateIntermediateSolution(const xarray<double> &L, const xarray<double> &U, const size_t depth,
+                                  const size_t dim);
 
     /**
      * Calculate the final solutions of the system
@@ -98,7 +99,7 @@ private:
      */
     xarray<double>
     calculateFinalSolution(const xarray<double> &L, const xarray<double> &U,
-                           const xarray<double> &D, size_t depth, size_t dim);
+                           const xarray<double> &D, const size_t depth, const size_t dim);
 };
 
 

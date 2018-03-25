@@ -37,15 +37,14 @@ MatricesInverter::invertMatrices(const xarray<double> &matrices)
     size_t depth = matrices.shape()[0];
     size_t dim = matrices.shape()[1];
 
-    pair<xarray<double>, xarray<double>> LU = matricesLUDecomposition(matrices, depth, dim);
+    // Decompose matrices to LU matrices
+    pair<xarray<double>, xarray<double>> &&LU = matricesLUDecomposition(matrices, depth, dim);
 
-    xarray<double> D = calculateIntermediateSolution(LU.first, LU.second, depth, dim);
+    // Calculate intermediate solutions
+    xarray<double> &&D = calculateIntermediateSolution(LU.first, LU.second, depth, dim);
 
-    xarray<double> inverses = calculateFinalSolution(LU.first, LU.second, D, depth, dim);
-
-    cout << "Matrix" << endl << matrices << endl << "Inverse" << endl << inverses;
-
-    return inverses;
+    // Return the final matrices
+    return calculateFinalSolution(LU.first, LU.second, D, depth, dim);
 }
 
 /**
@@ -88,7 +87,7 @@ MatricesInverter::invertMatrices(const xarray<double> &matrices)
  * @return pair of 2 xarrays {@first contains all matrices L triangles}, {@second contains all matrices U triangles}
  */
 pair<xarray<double>, xarray<double>>
-MatricesInverter::matricesLUDecomposition(const xarray<double> &matrices, size_t depth, size_t dim)
+MatricesInverter::matricesLUDecomposition(const xarray<double> &matrices, const size_t depth, const size_t dim)
 {
     // Each matrix will have its own Lower triangle matrix and Upper triangle matrix
     // Crout assumes initial U as an eye matrix
@@ -220,8 +219,8 @@ MatricesInverter::getURowSubtractedValue(const xarray<double> &L, const xarray<d
  * @return xarray The intermediate solutions array
  */
 xarray<double>
-MatricesInverter::calculateIntermediateSolution(const xarray<double> &L, const xarray<double> &U, size_t depth,
-                                                size_t dim)
+MatricesInverter::calculateIntermediateSolution(const xarray<double> &L, const xarray<double> &U, const size_t depth,
+                                                const size_t dim)
 {
     // The eye matrix
     xarray<double> I = eye<double>({depth, dim, dim});
@@ -286,7 +285,7 @@ MatricesInverter::calculateIntermediateSolution(const xarray<double> &L, const x
  */
 xarray<double>
 MatricesInverter::calculateFinalSolution(const xarray<double> &L, const xarray<double> &U,
-                                         const xarray<double> &D, size_t depth, size_t dim)
+                                         const xarray<double> &D, const size_t depth, const size_t dim)
 {
     // Calculate final solution matrix
     xarray<double> finalSolution = zeros<double>({depth, dim, dim});
