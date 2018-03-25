@@ -1,6 +1,6 @@
 #include <iostream>
-#include "xtensor/xarray.hpp"
 #include "MatricesInverter.h"
+#include "xtensor/xrandom.hpp"
 
 using namespace std;
 using namespace xt;
@@ -43,6 +43,8 @@ int main()
                             {0.09402211, 2.88242208, 1.85499803, 4.77238007, 2.67961157}
                     }
             };
+
+    xarray<double> r = xt::random::randint({10000, 5, 5}, -5, 5);
 
     MatricesInverter matricesInverter;
 

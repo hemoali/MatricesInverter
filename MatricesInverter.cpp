@@ -104,7 +104,7 @@ MatricesInverter::matricesLUDecomposition(const xarray<double> &matrices, const 
 
         // [B3] Update the L column
         auto &&LCol = view(L, all(), range(i, dim), i);
-        LCol = eval(view(matrices, all(), range(i, dim), i) - getLColSubtractedValue(L, U, i, dim));
+        LCol = (view(matrices, all(), range(i, dim), i) - getLColSubtractedValue(L, U, i, dim));
 
         // ========================================
         // Fill U rows
@@ -119,7 +119,7 @@ MatricesInverter::matricesLUDecomposition(const xarray<double> &matrices, const 
 
         // [C3,4]
         auto &&URow = view(U, all(), i, range(i + 1, dim));
-        URow = eval((view(matrices, all(), i, range(i + 1, dim)) - getURowSubtractedValue(L, U, i, dim)) /
+        URow = ((view(matrices, all(), i, range(i + 1, dim)) - getURowSubtractedValue(L, U, i, dim)) /
                     LCorrespondingDivisorValue);
     }
 
@@ -154,7 +154,7 @@ MatricesInverter::getLColSubtractedValue(const xarray<double> &L, const xarray<d
         UCol.reshape({UCol.shape()[0], 1, UCol.shape()[1]});
 
         // [B2] Calculate the subtractedValue
-        LColSubtractedValue = eval(sum(eval(previousLCols * UCol), {2}));
+        LColSubtractedValue = (sum((previousLCols * UCol), {2}));
     }
 
     return LColSubtractedValue;
@@ -188,7 +188,7 @@ MatricesInverter::getURowSubtractedValue(const xarray<double> &L, const xarray<d
         LRow.reshape({LRow.shape()[0], LRow.shape()[1], 1});
 
         // [C2]
-        URowSubtractedValue = eval(sum(eval(previousURows * LRow), {1}));
+        URowSubtractedValue = (sum((previousURows * LRow), {1}));
     }
 
     return URowSubtractedValue;
@@ -244,7 +244,7 @@ MatricesInverter::calculateIntermediateSolution(const xarray<double> &L, const x
             LRow.reshape({LRow.shape()[0], LRow.shape()[1], 1});
 
             // A[2]
-            DSubtractedValue = eval(sum(eval(previousDRows * LRow), {1}));
+            DSubtractedValue = (sum((previousDRows * LRow), {1}));
         }
 
         auto &&row = view(D, all(), i, all());
@@ -254,7 +254,7 @@ MatricesInverter::calculateIntermediateSolution(const xarray<double> &L, const x
         LCorrespondingDivisorValue.reshape({depth, 1});
 
         // A[3,4]
-        row = eval((view(I, all(), i, all()) - DSubtractedValue) / LCorrespondingDivisorValue);
+        row = ((view(I, all(), i, all()) - DSubtractedValue) / LCorrespondingDivisorValue);
     }
 
     return D;
@@ -309,7 +309,7 @@ MatricesInverter::calculateFinalSolution(const xarray<double> &L, const xarray<d
             URow.reshape({URow.shape()[0], URow.shape()[1], 1});
 
             // A[1,2]
-            subtractedValue = eval(sum(eval(nextValues * URow), {1}));
+            subtractedValue = (sum((nextValues * URow), {1}));
         }
 
         // A[3]
