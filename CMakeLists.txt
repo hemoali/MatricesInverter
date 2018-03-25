@@ -3,4 +3,4 @@ project(XtensorProject)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(XtensorProject main.cpp)
+add_executable(XtensorProject main.cpp MatricesInverter.cpp MatricesInverter.h)

@@ -1,3 +1,0 @@
-/Users/ibrahimradwan/Desktop/XtensorProject/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/Users/ibrahimradwan/Desktop/XtensorProject/cmake-build-debug/CMakeFiles/edit_cache.dir
-/Users/ibrahimradwan/Desktop/XtensorProject/cmake-build-debug/CMakeFiles/XtensorProject.dir
